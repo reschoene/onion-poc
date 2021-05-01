@@ -6,9 +6,9 @@ package onion.poc;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AppTest {
+class DomainModelTest {
     @Test void appHasAGreeting() {
-        App classUnderTest = new App();
+        DomainModel classUnderTest = new DomainModel();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
 }
