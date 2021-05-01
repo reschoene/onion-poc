@@ -17,6 +17,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.projectlombok:lombok:1.18.18'
+
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
 
@@ -25,11 +27,6 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.0-jre'
-}
-
-application {
-    // Define the main class for the application.
-    mainClass = 'onion.poc.DomainModel'
 }
 
 tasks.named('test') {
