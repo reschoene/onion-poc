@@ -1,2 +1,11 @@
-package onion.poc.externalservices;public class SpringBootAppLauncher {
+package onion.poc.externalservices;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootAppLauncher {
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootAppLauncher.class, args);
+    }
 }
