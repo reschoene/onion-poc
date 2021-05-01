@@ -1,12 +1,12 @@
-package onion.poc.external.services.jpa.repository;
+package onion.poc.external.services.spring.jpa.repository;
 
 import lombok.RequiredArgsConstructor;
 import onion.poc.domain.model.BankAccount;
 import onion.poc.domain.model.Customer;
 import onion.poc.domain.services.repository.BankAccountRepository;
-import onion.poc.external.services.jpa.entity.BankAccountEntity;
-import onion.poc.external.services.jpa.entity.CustomerEntity;
-import onion.poc.external.services.jpa.repository.springdata.BankAccountSpringJPA;
+import onion.poc.external.services.spring.jpa.entity.BankAccountEntity;
+import onion.poc.external.services.spring.jpa.entity.CustomerEntity;
+import onion.poc.external.services.spring.jpa.repository.springdata.BankAccountSpringJPA;
 
 import java.util.List;
 import java.util.Optional;

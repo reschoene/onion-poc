@@ -1,4 +1,4 @@
-package onion.poc.external.services;
+package onion.poc.external.services.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,11 +1,9 @@
-package onion.poc.external.services.jpa.entity;
+package onion.poc.external.services.spring.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import onion.poc.domain.model.Address;
-import onion.poc.domain.model.Contract;
 import onion.poc.domain.model.Customer;
 
 import javax.persistence.*;

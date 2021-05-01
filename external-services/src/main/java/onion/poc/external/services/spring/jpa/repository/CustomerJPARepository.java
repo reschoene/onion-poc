@@ -1,10 +1,10 @@
-package onion.poc.external.services.jpa.repository;
+package onion.poc.external.services.spring.jpa.repository;
 
 import lombok.RequiredArgsConstructor;
 import onion.poc.domain.model.Customer;
 import onion.poc.domain.services.repository.CustomerRepository;
-import onion.poc.external.services.jpa.entity.CustomerEntity;
-import onion.poc.external.services.jpa.repository.springdata.CustomerSpringJPA;
+import onion.poc.external.services.spring.jpa.entity.CustomerEntity;
+import onion.poc.external.services.spring.jpa.repository.springdata.CustomerSpringJPA;
 
 import java.util.Optional;
 
