@@ -6,8 +6,8 @@ import onion.poc.domain.model.Customer;
 import java.util.List;
 
 public interface ContractRepository {
-    void create(Contract contract);
+    long create(Contract contract);
     List<Contract> getByCustomer(Customer customer);
-    void update(Customer customer);
-    void delete(Customer customer);
+    void update(Contract contract);
+    void delete(Contract contract);
 }

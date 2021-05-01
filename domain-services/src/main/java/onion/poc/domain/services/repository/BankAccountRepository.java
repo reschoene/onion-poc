@@ -4,10 +4,11 @@ import onion.poc.domain.model.BankAccount;
 import onion.poc.domain.model.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BankAccountRepository {
-    void create(BankAccount account);
-    BankAccount getByNumber(long accountNumber);
+    long create(BankAccount account);
+    Optional<BankAccount> getByNumber(long accountNumber);
     List<BankAccount> getByCustomer(Customer customer);
     void update(BankAccount bankAccount);
     void delete(BankAccount bankAccount);

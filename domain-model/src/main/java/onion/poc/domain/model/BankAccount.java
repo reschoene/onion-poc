@@ -3,12 +3,13 @@ package onion.poc.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import onion.poc.domain.exception.DepositException;
 import onion.poc.domain.exception.WithdrawException;
 
 @Builder
 @AllArgsConstructor
-@Getter
+@Getter @Setter
 public class BankAccount {
     private long number;
     private Customer owner;
