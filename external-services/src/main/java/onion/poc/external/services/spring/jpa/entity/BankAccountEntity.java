@@ -17,13 +17,17 @@ import javax.persistence.*;
 public class BankAccountEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long number;
+    private long id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private CustomerEntity owner;
+
     private double balance;
 
     public static BankAccountEntity fromModel(BankAccount bankAccount){
         return BankAccountEntity.builder()
-                .number(bankAccount.getNumber())
+                .id(bankAccount.getNumber())
                 .owner(CustomerEntity.fromModel(bankAccount.getOwner()))
                 .balance(bankAccount.getBalance())
                 .build();
@@ -33,7 +37,7 @@ public class BankAccountEntity{
         return BankAccount.builder()
                 .owner(getOwner().toModel())
                 .balance(getBalance())
-                .number(getNumber())
+                .number(getId())
                 .build();
     }
 }

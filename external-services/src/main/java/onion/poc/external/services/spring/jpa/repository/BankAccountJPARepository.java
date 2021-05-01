@@ -19,8 +19,8 @@ public class BankAccountJPARepository implements BankAccountRepository {
     @Override
     public long create(BankAccount account) {
         BankAccountEntity entity = BankAccountEntity.fromModel(account);
-        entity.setNumber(0);
-        return jpaRepo.save(entity).getNumber();
+        entity.setId(0);
+        return jpaRepo.save(entity).getId();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class BankAccountJPARepository implements BankAccountRepository {
         var optEntity = jpaRepo.findById(bankAccount.getNumber());
         if(optEntity.isPresent()){
             var entity = optEntity.get();
-            entity.setNumber(bankAccount.getNumber());
+            entity.setId(bankAccount.getNumber());
             entity.setBalance(bankAccount.getBalance());
             jpaRepo.save(entity);
         }

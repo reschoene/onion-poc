@@ -22,6 +22,9 @@ public class CustomerEntity {
     private String familyName;
     private String cpf;
     private String cnpj;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private AddressEntity address;
 
     public static CustomerEntity fromModel(Customer customer){

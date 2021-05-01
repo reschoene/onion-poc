@@ -22,7 +22,13 @@ public class ContractEntity {
     private LocalDate startDate;
     private LocalDate endDate;
     private double maintenanceFee;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "number", referencedColumnName = "id")
     private BankAccountEntity account;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private CustomerEntity customer;
 
     public static ContractEntity fromModel(Contract contract){
