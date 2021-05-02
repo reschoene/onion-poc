@@ -18,6 +18,9 @@ public class BankAccountDto {
     private double balance;
 
     public static BankAccountDto fromModel(BankAccount bankAccount){
+        if (bankAccount == null)
+            return null;
+
         return BankAccountDto.builder()
                 .number(bankAccount.getNumber())
                 .owner(CustomerDto.fromModel(bankAccount.getOwner()))
@@ -27,7 +30,7 @@ public class BankAccountDto {
 
     public BankAccount toModel(){
         return BankAccount.builder()
-                .owner(getOwner().toModel())
+                .owner((getOwner() != null ? getOwner().toModel() : null))
                 .balance(getBalance())
                 .number(getNumber())
                 .build();

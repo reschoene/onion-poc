@@ -46,7 +46,7 @@ public class CustomerEntity implements ConvertableEntity<CustomerEntity, Custome
                 .familyName(getFamilyName())
                 .cpf(getCpf())
                 .cnpj(getCnpj())
-                .address(getAddress().toModel())
+                .address((getAddress() != null ? getAddress().toModel(): null))
                 .build();
     }
 }

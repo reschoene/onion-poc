@@ -19,7 +19,7 @@ public class BankAccountEntity implements ConvertableEntity<BankAccountEntity, B
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id")
     private CustomerEntity owner;
 
@@ -36,7 +36,7 @@ public class BankAccountEntity implements ConvertableEntity<BankAccountEntity, B
     @Override
     public BankAccount toModel(){
         return BankAccount.builder()
-                .owner(getOwner().toModel())
+                .owner((getOwner() != null ? getOwner().toModel(): null))
                 .balance(getBalance())
                 .number(getId())
                 .build();

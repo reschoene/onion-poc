@@ -21,6 +21,9 @@ public class CustomerDto {
     private AddressDto address;
 
     public static CustomerDto fromModel(Customer customer){
+        if (customer == null)
+            return null;
+
         return CustomerDto.builder()
                 .id(customer.getId())
                 .firstName(customer.getFirstName())
@@ -38,7 +41,7 @@ public class CustomerDto {
                 .familyName(getFamilyName())
                 .cpf(getCpf())
                 .cnpj(getCnpj())
-                .address(getAddress().toModel())
+                .address((getAddress() != null ? getAddress().toModel() : null))
                 .build();
     }
 }

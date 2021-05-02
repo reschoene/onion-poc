@@ -25,6 +25,9 @@ public class ContractDto {
     private CustomerDto customer;
 
     public static ContractDto fromModel(Contract contract){
+        if (contract == null)
+            return null;
+
         return ContractDto.builder()
                 .id(contract.getId())
                 .customer(CustomerDto.fromModel(contract.getCustomer()))
@@ -38,8 +41,8 @@ public class ContractDto {
     public Contract toModel(){
         return Contract.builder()
                 .id(getId())
-                .customer(getCustomer().toModel())
-                .account(getAccount().toModel())
+                .customer((getCustomer() != null ? getCustomer().toModel() : null))
+                .account((getAccount() != null ? getAccount().toModel() : null))
                 .startDate(getStartDate())
                 .endDate(getEndDate())
                 .maintenanceFee(getMaintenanceFee())

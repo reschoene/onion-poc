@@ -23,7 +23,9 @@ public class BankAccountJPARepository implements BankAccountRepository {
         var customerEntity = new CustomerEntity();
         var bankAccountEntity = new BankAccountEntity();
 
-        addressEntity.loadFromModel(account.getOwner().getAddress());
+        if(account.getOwner() != null)
+            addressEntity.loadFromModel(account.getOwner().getAddress());
+
         customerEntity.loadFromModel(account.getOwner());
         bankAccountEntity.loadFromModel(account);
 
@@ -47,6 +49,7 @@ public class BankAccountJPARepository implements BankAccountRepository {
         var customerEntity = new CustomerEntity();
 
         addressEntity.loadFromModel(customer.getAddress());
+        customerEntity.loadFromModel(customer);
 
         customerEntity.setAddress(addressEntity);
 

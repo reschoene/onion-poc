@@ -19,6 +19,9 @@ public class AddressDto {
     private int number;
 
     public static AddressDto fromModel(Address address){
+        if (address == null)
+            return null;
+
         return AddressDto.builder()
                 .zipCode(address.getZipCode())
                 .street(address.getStreet())

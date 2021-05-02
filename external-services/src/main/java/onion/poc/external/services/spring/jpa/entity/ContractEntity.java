@@ -24,11 +24,11 @@ public class ContractEntity implements ConvertableEntity<ContractEntity, Contrac
     private LocalDate endDate;
     private double maintenanceFee;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "number", referencedColumnName = "id")
     private BankAccountEntity account;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
     private CustomerEntity customer;
 
@@ -46,8 +46,8 @@ public class ContractEntity implements ConvertableEntity<ContractEntity, Contrac
     public Contract toModel(){
         return Contract.builder()
                 .id(getId())
-                .customer(getCustomer().toModel())
-                .account(getAccount().toModel())
+                .customer((getCustomer() != null ? getCustomer().toModel(): null))
+                .account((getAccount() != null ? getAccount().toModel(): null))
                 .startDate(getStartDate())
                 .endDate(getEndDate())
                 .maintenanceFee(getMaintenanceFee())

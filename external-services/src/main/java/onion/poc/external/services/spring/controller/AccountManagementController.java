@@ -24,7 +24,7 @@ public class AccountManagementController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BankAccountDto>> getByAccountNumber(@RequestBody CustomerDto customerDto){
+    public ResponseEntity<List<BankAccountDto>> getByCustomer(@RequestBody CustomerDto customerDto){
         var opt = accountManagement.getByCustomer(customerDto.toModel());
         return ResponseEntity.ok(opt.stream().map(BankAccountDto::fromModel).collect(Collectors.toList()));
     }

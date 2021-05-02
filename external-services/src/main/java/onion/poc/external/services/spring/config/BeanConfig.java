@@ -48,11 +48,11 @@ public class BeanConfig {
 
     @Bean
     public AccountManagement getAccountManagement(){
-        return new AccountManagementService(getBankAccountRepository());
+        return new AccountManagementService(getBankAccountRepository(), getContractRepository());
     }
 
     @Bean
     public CustomerEnrollment getCustomerEnrollment(){
-        return new CustomerEnrollmentService(getContractRepository());
+        return new CustomerEnrollmentService(getContractRepository(), getCustomerRepository(), getBankAccountRepository());
     }
 }
