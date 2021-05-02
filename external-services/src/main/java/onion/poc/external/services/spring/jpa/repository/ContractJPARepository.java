@@ -19,19 +19,36 @@ public class ContractJPARepository implements ContractRepository {
 
     @Override
     public long create(Contract contract) {
-        var addressEntity = AddressEntity.fromModel(contract.getCustomer().getAddress());
-        var customerEntity = CustomerEntity.fromModel(contract.getCustomer(), addressEntity);
-        var accountEntity = BankAccountEntity.fromModel(contract.getAccount(), customerEntity);
+        var addressEntity = new AddressEntity();
+        var customerEntity = new CustomerEntity();
+        var bankAccountEntity = new BankAccountEntity();
+        var contractEntity = new ContractEntity();
 
-        ContractEntity entity = ContractEntity.fromModel(contract, customerEntity, accountEntity);
-        entity.setId(0);
-        return jpaRepo.save(entity).getId();
+        addressEntity.loadFromModel(contract.getCustomer().getAddress());
+        customerEntity.loadFromModel(contract.getCustomer());
+        bankAccountEntity.loadFromModel(contract.getAccount());
+        contractEntity.loadFromModel(contract);
+
+        customerEntity.setAddress(addressEntity);
+        bankAccountEntity.setOwner(customerEntity);
+        contractEntity.setAccount(bankAccountEntity);
+        contractEntity.setCustomer(customerEntity);
+
+        contractEntity.setId(0);
+        return jpaRepo.save(contractEntity).getId();
     }
 
     @Override
     public List<Contract> getByCustomer(Customer customer) {
-        var addressEntity = AddressEntity.fromModel(customer.getAddress());
-        return jpaRepo.findByCustomer(CustomerEntity.fromModel(customer, addressEntity))
+        var addressEntity = new AddressEntity();
+        var customerEntity = new CustomerEntity();
+
+        addressEntity.loadFromModel(customer.getAddress());
+        customerEntity.loadFromModel(customer);
+
+        customerEntity.setAddress(addressEntity);
+
+        return jpaRepo.findByCustomer(customerEntity)
                 .stream()
                 .map(ContractEntity::toModel)
                 .collect(Collectors.toList());

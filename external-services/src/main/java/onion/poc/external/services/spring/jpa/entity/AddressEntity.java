@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Address")
-public class AddressEntity {
+public class AddressEntity implements ConvertableEntity<AddressEntity, Address>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,17 +22,16 @@ public class AddressEntity {
     private String street;
     private int number;
 
-    public static AddressEntity fromModel(Address address){
-        if(address == null)
-            return null;
-
-        return AddressEntity.builder()
-                .zipCode(address.getZipCode())
-                .street(address.getStreet())
-                .number(address.getNumber())
-                .build();
+    @Override
+    public void loadFromModel(Address address){
+        if (address != null){
+            zipCode = address.getZipCode();
+            street = address.getStreet();
+            number = address.getNumber();
+        }
     }
 
+    @Override
     public Address toModel(){
         return Address.builder()
                 .zipCode(getZipCode())

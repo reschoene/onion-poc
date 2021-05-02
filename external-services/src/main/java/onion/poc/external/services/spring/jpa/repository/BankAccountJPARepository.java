@@ -19,11 +19,20 @@ public class BankAccountJPARepository implements BankAccountRepository {
 
     @Override
     public long create(BankAccount account) {
-        var addressEntity = AddressEntity.fromModel(account.getOwner().getAddress());
-        var customerEntity = CustomerEntity.fromModel(account.getOwner(), addressEntity);
-        BankAccountEntity entity = BankAccountEntity.fromModel(account, customerEntity);
-        entity.setId(0);
-        return jpaRepo.save(entity).getId();
+        var addressEntity = new AddressEntity();
+        var customerEntity = new CustomerEntity();
+        var bankAccountEntity = new BankAccountEntity();
+
+        addressEntity.loadFromModel(account.getOwner().getAddress());
+        customerEntity.loadFromModel(account.getOwner());
+        bankAccountEntity.loadFromModel(account);
+
+        customerEntity.setAddress(addressEntity);
+        bankAccountEntity.setOwner(customerEntity);
+
+        bankAccountEntity.setId(0);
+
+        return jpaRepo.save(bankAccountEntity).getId();
     }
 
     @Override
@@ -34,8 +43,14 @@ public class BankAccountJPARepository implements BankAccountRepository {
 
     @Override
     public List<BankAccount> getByCustomer(Customer customer) {
-        var addressEntity = AddressEntity.fromModel(customer.getAddress());
-        return jpaRepo.findByOwner(CustomerEntity.fromModel(customer, addressEntity))
+        var addressEntity = new AddressEntity();
+        var customerEntity = new CustomerEntity();
+
+        addressEntity.loadFromModel(customer.getAddress());
+
+        customerEntity.setAddress(addressEntity);
+
+        return jpaRepo.findByOwner(customerEntity)
                 .stream()
                 .map(BankAccountEntity::toModel)
                 .collect(Collectors.toList());

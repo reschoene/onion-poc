@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Customer")
-public class CustomerEntity {
+public class CustomerEntity implements ConvertableEntity<CustomerEntity, Customer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -27,20 +27,18 @@ public class CustomerEntity {
     @JoinColumn(name = "id")
     private AddressEntity address;
 
-    public static CustomerEntity fromModel(Customer customer, AddressEntity addressEntity){
-        if (customer == null)
-            return null;
-
-        return CustomerEntity.builder()
-                .id(customer.getId())
-                .firstName(customer.getFirstName())
-                .familyName(customer.getFamilyName())
-                .cpf(customer.getCpf())
-                .cnpj(customer.getCnpj())
-                .address(addressEntity)
-                .build();
+    @Override
+    public void loadFromModel(Customer customer){
+        if (customer != null){
+            id = customer.getId();
+            firstName = customer.getFirstName();
+            familyName = customer.getFamilyName();
+            cpf = customer.getCpf();
+            cnpj = customer.getCnpj();
+        }
     }
 
+    @Override
     public Customer toModel(){
         return Customer.builder()
                 .id(getId())

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Contract")
-public class ContractEntity {
+public class ContractEntity implements ConvertableEntity<ContractEntity, Contract>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -32,20 +32,17 @@ public class ContractEntity {
     @JoinColumn(name = "id", referencedColumnName = "id")
     private CustomerEntity customer;
 
-    public static ContractEntity fromModel(Contract contract, CustomerEntity customerEntity, BankAccountEntity bankAccountEntity){
-        if (contract == null)
-            return null;
-
-        return ContractEntity.builder()
-                .id(contract.getId())
-                .customer(customerEntity)
-                .account(bankAccountEntity)
-                .startDate(contract.getStartDate())
-                .endDate(contract.getEndDate())
-                .maintenanceFee(contract.getMaintenanceFee())
-                .build();
+    @Override
+    public void loadFromModel(Contract contract){
+        if (contract != null){
+            id = contract.getId();
+            startDate = contract.getStartDate();
+            endDate = contract.getEndDate();
+            maintenanceFee = contract.getMaintenanceFee();
+        }
     }
 
+    @Override
     public Contract toModel(){
         return Contract.builder()
                 .id(getId())

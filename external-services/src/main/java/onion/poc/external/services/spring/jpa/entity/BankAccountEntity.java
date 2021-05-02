@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "BankAccount")
-public class BankAccountEntity{
+public class BankAccountEntity implements ConvertableEntity<BankAccountEntity, BankAccount>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,17 +25,15 @@ public class BankAccountEntity{
 
     private double balance;
 
-    public static BankAccountEntity fromModel(BankAccount bankAccount, CustomerEntity customerEntity){
-        if (bankAccount == null)
-            return null;
-
-        return BankAccountEntity.builder()
-                .id(bankAccount.getNumber())
-                .owner(customerEntity)
-                .balance(bankAccount.getBalance())
-                .build();
+    @Override
+    public void loadFromModel(BankAccount bankAccount){
+        if (bankAccount != null){
+            id = bankAccount.getNumber();
+            balance = bankAccount.getBalance();
+        }
     }
 
+    @Override
     public BankAccount toModel(){
         return BankAccount.builder()
                 .owner(getOwner().toModel())

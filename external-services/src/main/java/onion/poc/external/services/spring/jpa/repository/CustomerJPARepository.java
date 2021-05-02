@@ -15,10 +15,16 @@ public class CustomerJPARepository implements CustomerRepository {
 
     @Override
     public long create(Customer customer) {
-        var addressEntity = AddressEntity.fromModel(customer.getAddress());
-        CustomerEntity entity = CustomerEntity.fromModel(customer, addressEntity);
-        entity.setId(0);
-        return jpaRepo.save(entity).getId();
+        var addressEntity = new AddressEntity();
+        var customerEntity = new CustomerEntity();
+
+        addressEntity.loadFromModel(customer.getAddress());
+        customerEntity.loadFromModel(customer);
+
+        customerEntity.setAddress(addressEntity);
+
+        customerEntity.setId(0);
+        return jpaRepo.save(customerEntity).getId();
     }
 
     @Override
