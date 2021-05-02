@@ -3,6 +3,7 @@ package onion.poc.external.services.spring.jpa.repository;
 import lombok.RequiredArgsConstructor;
 import onion.poc.domain.model.Customer;
 import onion.poc.domain.services.repository.CustomerRepository;
+import onion.poc.external.services.spring.jpa.entity.AddressEntity;
 import onion.poc.external.services.spring.jpa.entity.CustomerEntity;
 import onion.poc.external.services.spring.jpa.repository.springdata.CustomerSpringJPA;
 
@@ -14,7 +15,8 @@ public class CustomerJPARepository implements CustomerRepository {
 
     @Override
     public long create(Customer customer) {
-        CustomerEntity entity = CustomerEntity.fromModel(customer);
+        var addressEntity = AddressEntity.fromModel(customer.getAddress());
+        CustomerEntity entity = CustomerEntity.fromModel(customer, addressEntity);
         entity.setId(0);
         return jpaRepo.save(entity).getId();
     }

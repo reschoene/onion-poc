@@ -23,6 +23,9 @@ public class AddressEntity {
     private int number;
 
     public static AddressEntity fromModel(Address address){
+        if(address == null)
+            return null;
+
         return AddressEntity.builder()
                 .zipCode(address.getZipCode())
                 .street(address.getStreet())

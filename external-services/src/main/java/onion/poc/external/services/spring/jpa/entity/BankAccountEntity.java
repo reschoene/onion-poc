@@ -20,15 +20,18 @@ public class BankAccountEntity{
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "id")
     private CustomerEntity owner;
 
     private double balance;
 
-    public static BankAccountEntity fromModel(BankAccount bankAccount){
+    public static BankAccountEntity fromModel(BankAccount bankAccount, CustomerEntity customerEntity){
+        if (bankAccount == null)
+            return null;
+
         return BankAccountEntity.builder()
                 .id(bankAccount.getNumber())
-                .owner(CustomerEntity.fromModel(bankAccount.getOwner()))
+                .owner(customerEntity)
                 .balance(bankAccount.getBalance())
                 .build();
     }

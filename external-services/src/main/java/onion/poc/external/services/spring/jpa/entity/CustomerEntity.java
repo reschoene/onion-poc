@@ -24,17 +24,20 @@ public class CustomerEntity {
     private String cnpj;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "id")
     private AddressEntity address;
 
-    public static CustomerEntity fromModel(Customer customer){
+    public static CustomerEntity fromModel(Customer customer, AddressEntity addressEntity){
+        if (customer == null)
+            return null;
+
         return CustomerEntity.builder()
                 .id(customer.getId())
                 .firstName(customer.getFirstName())
                 .familyName(customer.getFamilyName())
                 .cpf(customer.getCpf())
                 .cnpj(customer.getCnpj())
-                .address(AddressEntity.fromModel(customer.getAddress()))
+                .address(addressEntity)
                 .build();
     }
 

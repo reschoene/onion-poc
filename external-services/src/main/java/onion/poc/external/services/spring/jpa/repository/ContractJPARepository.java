@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import onion.poc.domain.model.Contract;
 import onion.poc.domain.model.Customer;
 import onion.poc.domain.services.repository.ContractRepository;
+import onion.poc.external.services.spring.jpa.entity.AddressEntity;
+import onion.poc.external.services.spring.jpa.entity.BankAccountEntity;
 import onion.poc.external.services.spring.jpa.entity.ContractEntity;
 import onion.poc.external.services.spring.jpa.entity.CustomerEntity;
 import onion.poc.external.services.spring.jpa.repository.springdata.ContractSpringJPA;
@@ -17,14 +19,19 @@ public class ContractJPARepository implements ContractRepository {
 
     @Override
     public long create(Contract contract) {
-        ContractEntity entity = ContractEntity.fromModel(contract);
+        var addressEntity = AddressEntity.fromModel(contract.getCustomer().getAddress());
+        var customerEntity = CustomerEntity.fromModel(contract.getCustomer(), addressEntity);
+        var accountEntity = BankAccountEntity.fromModel(contract.getAccount(), customerEntity);
+
+        ContractEntity entity = ContractEntity.fromModel(contract, customerEntity, accountEntity);
         entity.setId(0);
         return jpaRepo.save(entity).getId();
     }
 
     @Override
     public List<Contract> getByCustomer(Customer customer) {
-        return jpaRepo.findByCustomer(CustomerEntity.fromModel(customer))
+        var addressEntity = AddressEntity.fromModel(customer.getAddress());
+        return jpaRepo.findByCustomer(CustomerEntity.fromModel(customer, addressEntity))
                 .stream()
                 .map(ContractEntity::toModel)
                 .collect(Collectors.toList());

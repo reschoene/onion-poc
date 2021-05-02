@@ -16,7 +16,7 @@ public class CustomerEnrollmentController {
     private final CustomerEnrollment customerEnrollment;
 
     @PostMapping("/enroll")
-    public ResponseEntity<CustomerDto>  enrollNewCustomer(@RequestBody CustomerDto customerDto){
+    public ResponseEntity<CustomerDto> enrollNewCustomer(@RequestBody CustomerDto customerDto){
         if (customerEnrollment.enrollNewCustomer(customerDto.toModel()))
             return ResponseEntity.ok(customerDto);
         else

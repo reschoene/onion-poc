@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import onion.poc.domain.model.Contract;
 
 import javax.persistence.*;
+import javax.security.auth.login.AccountException;
 import java.time.LocalDate;
 
 @Entity
@@ -31,11 +32,14 @@ public class ContractEntity {
     @JoinColumn(name = "id", referencedColumnName = "id")
     private CustomerEntity customer;
 
-    public static ContractEntity fromModel(Contract contract){
+    public static ContractEntity fromModel(Contract contract, CustomerEntity customerEntity, BankAccountEntity bankAccountEntity){
+        if (contract == null)
+            return null;
+
         return ContractEntity.builder()
                 .id(contract.getId())
-                .customer(CustomerEntity.fromModel(contract.getCustomer()))
-                .account(BankAccountEntity.fromModel(contract.getAccount()))
+                .customer(customerEntity)
+                .account(bankAccountEntity)
                 .startDate(contract.getStartDate())
                 .endDate(contract.getEndDate())
                 .maintenanceFee(contract.getMaintenanceFee())

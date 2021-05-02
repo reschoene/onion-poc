@@ -53,6 +53,6 @@ public class BeanConfig {
 
     @Bean
     public CustomerEnrollment getCustomerEnrollment(){
-        return new CustomerEnrollmentService(getContractRepository(), getCustomerRepository(), getBankAccountRepository());
+        return new CustomerEnrollmentService(getContractRepository());
     }
 }
