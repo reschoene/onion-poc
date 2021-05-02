@@ -13,10 +13,11 @@ public class FundsTransferServiceController {
     private final AccountTransferService transferService;
 
     @PostMapping
-    public ResponseEntity<FundsTransferDto> transfer(@RequestBody FundsTransferDto fundsTransferDto){
-        if (transferService.transfer(fundsTransferDto.getAmount(), fundsTransferDto.getFrom(), fundsTransferDto.getTo()))
+    public ResponseEntity<?> transfer(@RequestBody FundsTransferDto fundsTransferDto){
+        String res = transferService.transfer(fundsTransferDto.getAmount(), fundsTransferDto.getFrom(), fundsTransferDto.getTo());
+        if ("".equals(res))
             return ResponseEntity.ok().build();
         else
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(res);
     }
 }

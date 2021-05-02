@@ -28,7 +28,7 @@ public class BeanConfig {
 
     @Bean
     public AccountTransferService getAccountTransferService(){
-        return new FundsTransferService();
+        return new FundsTransferService(getBankAccountRepository());
     }
 
     @Bean

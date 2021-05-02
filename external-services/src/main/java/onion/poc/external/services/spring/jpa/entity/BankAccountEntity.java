@@ -19,8 +19,8 @@ public class BankAccountEntity implements ConvertableEntity<BankAccountEntity, B
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private CustomerEntity owner;
 
     private double balance;

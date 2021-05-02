@@ -1,14 +1,12 @@
 package onion.poc.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import onion.poc.domain.exception.DepositException;
 import onion.poc.domain.exception.WithdrawException;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 public class BankAccount {
     private long number;
@@ -16,7 +14,7 @@ public class BankAccount {
     private double balance;
 
     public double withdraw(double value) throws WithdrawException {
-        if(value < balance)
+        if(balance < value )
             throw new WithdrawException("Current balance is less than given amount");
 
         balance -= value;
