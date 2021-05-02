@@ -1,8 +1,11 @@
 package onion.poc.domain.services.usecases;
 
+import onion.poc.domain.model.Contract;
 import onion.poc.domain.model.Customer;
 
+import java.util.List;
+
 public interface CustomerEnrollment {
-    boolean enrollNewCustomer(Customer customer);
-    boolean unEnrollCustomer(Customer customer);
+    Contract enrollNewCustomer(Customer customer);
+    List<Contract> unEnrollCustomer(Customer customer);
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class CustomerEnrollmentService implements CustomerEnrollment {
     private final ContractRepository contractRepository;
 
-    public boolean enrollNewCustomer(Customer customer) {
+    public Contract enrollNewCustomer(Customer customer) {
         try{
             BankAccount account = BankAccount.builder()
                     .balance(0)
@@ -28,17 +28,17 @@ public class CustomerEnrollmentService implements CustomerEnrollment {
                     .account(account)
                     .build();
 
-            contractRepository.create(contract);
+            var id = contractRepository.create(contract);
+
+            return contractRepository.getById(id).get();
         }catch (Exception e){
             e.printStackTrace();
-            return false;
+            return null;
         }
-
-        return true;
     }
 
     @Override
-    public boolean unEnrollCustomer(Customer customer) {
+    public List<Contract> unEnrollCustomer(Customer customer) {
         List<Contract> contracts = contractRepository.getByCustomer(customer);
 
         try {
@@ -48,9 +48,9 @@ public class CustomerEnrollmentService implements CustomerEnrollment {
             }
         }catch (Exception e){
             e.printStackTrace();
-            return false;
+            return null;
         }
 
-        return true;
+        return contracts;
     }
 }

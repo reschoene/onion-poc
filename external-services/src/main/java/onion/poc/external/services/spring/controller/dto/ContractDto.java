@@ -1,5 +1,6 @@
 package onion.poc.external.services.spring.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,8 @@ public class ContractDto {
     private LocalDate endDate;
     private double maintenanceFee;
     private BankAccountDto account;
+
+    @JsonIgnore
     private CustomerDto customer;
 
     public static ContractDto fromModel(Contract contract){

@@ -11,6 +11,7 @@ import onion.poc.external.services.spring.jpa.entity.CustomerEntity;
 import onion.poc.external.services.spring.jpa.repository.springdata.ContractSpringJPA;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -36,6 +37,11 @@ public class ContractJPARepository implements ContractRepository {
 
         contractEntity.setId(0);
         return jpaRepo.save(contractEntity).getId();
+    }
+
+    @Override
+    public Optional<Contract> getById(long id) {
+        return jpaRepo.findById(id).map(ContractEntity::toModel);
     }
 
     @Override

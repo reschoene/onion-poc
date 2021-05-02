@@ -2,12 +2,16 @@ package onion.poc.external.services.spring.controller;
 
 import lombok.RequiredArgsConstructor;
 import onion.poc.domain.services.usecases.CustomerEnrollment;
+import onion.poc.external.services.spring.controller.dto.ContractDto;
 import onion.poc.external.services.spring.controller.dto.CustomerDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,18 +20,21 @@ public class CustomerEnrollmentController {
     private final CustomerEnrollment customerEnrollment;
 
     @PostMapping("/enroll")
-    public ResponseEntity<CustomerDto> enrollNewCustomer(@RequestBody CustomerDto customerDto){
-        if (customerEnrollment.enrollNewCustomer(customerDto.toModel()))
-            return ResponseEntity.ok(customerDto);
+    public ResponseEntity<ContractDto> enrollNewCustomer(@RequestBody CustomerDto customerDto){
+        var contract = customerEnrollment.enrollNewCustomer(customerDto.toModel());
+        if (contract != null)
+            return ResponseEntity.ok(ContractDto.fromModel(contract));
         else
             return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/un-enroll")
-    public ResponseEntity<CustomerDto> unEnrollCustomer(@RequestBody CustomerDto customerDto){
-        if (customerEnrollment.unEnrollCustomer(customerDto.toModel()))
-            return ResponseEntity.ok(customerDto);
-        else
+    public ResponseEntity<List<ContractDto>> unEnrollCustomer(@RequestBody CustomerDto customerDto){
+        var contractList = customerEnrollment.unEnrollCustomer(customerDto.toModel());
+
+        if (contractList == null)
             return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(contractList.stream().map(ContractDto::fromModel).collect(Collectors.toList()));
     }
 }
