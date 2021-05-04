@@ -1,14 +1,12 @@
 package onion.poc.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 public class Contract {
     private long id;
