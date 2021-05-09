@@ -34,4 +34,4 @@ A POC foi desenvolvida em Java e consiste em um projeto *gradle* multi-módulos,
 `gradle external-services:bootRun`
 4. Na raíz do projeto disponibilizei o arquivo `OnionArch.postman_collection.json`, ele contem uma *collection* do Postman. Importe esta *collection* no Postman para testar os endpoints do serviço REST. <br><br>
 
-[Artigo no blog do autor](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+[Clique aqui para visualizar o artigo de origem da arquitetura no blog do autor](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
