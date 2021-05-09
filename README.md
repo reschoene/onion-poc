@@ -7,11 +7,11 @@ A arquitetura se baseia principalmente no controle de acoplamento, na qual camad
 # ![Diagrama](./diagram.png) <br><br> 
 
 ### Princípios fundamentais da Arquitetura Onion
-O autor sem seu blog ainda estabelece os princícios fundametais de sua arquitetura. São eles:
+O autor sem seu blog ainda estabelece os princícios fundamentais de sua arquitetura. São eles:
 1. O sistema é contruído ao redor de uma camada de modelo, que é independente.
 2. Camadas internas definem interfaces. Camadas externas implementam interfaces.
 3. A direção do acoplamento é sempre para o centro.
-4. Todo o código do core da aplicação (camadas domain model, domain services e application services) deve poder ser compilado e executado sem a camada de infraestrutura 
+4. Todo o código do core da aplicação (camadas domain model, domain services e application services) deve poder ser compilado e executado sem a camada de infraestrutura <br><br>
 
 ### Sobre esta POC
 A POC foi desenvolvida em Java e consiste em um projeto *gradle* multi-módulos, sendo eles:
