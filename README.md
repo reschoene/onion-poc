@@ -4,7 +4,7 @@
 Criada por Jeffrey Palermo, assim como a arquitetura hexagonal ela também tem por objetivo a separação entre responsabilidades (SoC) das partes do sistema, propiciando uma maior manutenibilidade. Segundo o autor, ela não é apropriada para pequenos sistemas como pequenos web sites, mas sim voltada para aplicações corporativas de longa duração e que possuem uma complexa lógica de negócios. Ela enfatiza o uso de interfaces para descrever contratos de comportamentos e força a externalização da infraestrutura (tecnologia). 
 A arquitetura se baseia principalmente no controle de acoplamento, na qual camadas mais externas podem depender de camadas mais internas, ou seja, todo o acoplamento é voltado para o centro. Para alcançar isso, a arquitetura faz vasto uso do principio de inversão de dependência, na qual as camadas mais internas dependem de contratos (interfaces) para outros serviços, cujas implementações são externalizadas nas camadas seguintes.
 
-# ![Diagrama](./diagram.png) <br><br> 
+# ![Diagrama](./diagram.png) <br><br>
 
 ### Princípios fundamentais da Arquitetura Onion
 O autor sem seu blog ainda estabelece os princícios fundamentais de sua arquitetura. São eles:
