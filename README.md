@@ -32,4 +32,6 @@ A POC foi desenvolvida em Java e consiste em um projeto *gradle* multi-módulos,
 2. Execute o comando a seguir para baixar as dependências do projeto, executar seus testes automatizados e compilar o mesmo:   `./gradlew build`. Será gerado o jar da aplicação no diretório `./external-services/build/libs`
 3. Ainda na raíz do projeto, execute o comando abaixo para iniciar a execução da aplicação na porta 8080
 `gradle external-services:bootRun`
-4. Na raíz do projeto disponibilizei o arquivo `OnionArch.postman_collection.json`, ele contem uma *collection* do Postman. Importe esta *collection* no Postman para testar os endpoints do serviço REST.
+4. Na raíz do projeto disponibilizei o arquivo `OnionArch.postman_collection.json`, ele contem uma *collection* do Postman. Importe esta *collection* no Postman para testar os endpoints do serviço REST. <br><br>
+
+[Artigo no blog do autor](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
